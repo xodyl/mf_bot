@@ -44,13 +44,10 @@ def main():
     for command_name, command_handler in COMMAND_HANDLERS.items():
         application.add_handler(CommandHandler(command_name, command_handler))
 
-    # application.add_handler(
-    #     MessageHandler(filters.AUDIO & filters.ChatType.GROUPS, handlers.is_battled)
-    # )
     application.add_handler(
-        MessageHandler(filters.AUDIO & filters.ChatType.GROUPS, handlers.test)
+        MessageHandler(filters.AUDIO & filters.ChatType.GROUPS, handlers.is_battled)
     )
-    
+
     application.run_polling()
 
 
