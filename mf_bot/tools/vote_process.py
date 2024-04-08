@@ -10,7 +10,7 @@ from mf_bot.tools.beatmakers import (
     get_betmakers_list_as_string,
     get_beatmakers_from_last_battle
 )
-from mf_bot.settings import EXPECTED_VOTE_ARGS_LEN, POINTS
+from mf_bot.settings import EXPECTED_VOTE_ARGS_LEN, POINTS, CHAT_FOR_BEATS_ID
  
 
 async def expected_args_len(reality: int) -> bool:
@@ -73,9 +73,11 @@ async def set_vote(user_id: int, beatmakers: list) -> None:
     )
 
 
-async def set_vote_process(args: List[str], user_id: int) -> str:
+async def set_vote_process(args: List[str], user_id: int, chat_id) -> str:
     if await battle_is_open():
         return texts.BATTLE_TIME
+    if not chat_id == CHAT_FOR_BEATS_ID:
+        return texts.WRONG_CHAT
     if not args or not await expected_args_len(len(args)):
         return texts.INVALID_ARGS
     if await has_duplicate(args): 

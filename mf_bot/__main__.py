@@ -18,6 +18,7 @@ COMMAND_HANDLERS = {
     "login": handlers.login,
     "beatmakers": handlers.beatmakers,  
     'insert': handlers.insert_beatmaker,
+    'remove': handlers.remove_beatmaker,
     "start_battle": handlers.start_battle, 
     "start_vote": handlers.start_vote, 
     "count": handlers.count_vote, 

@@ -59,3 +59,9 @@ INVALID_PASSWORD: str = '''Invalid password.
 
 BEATMAKERS_LIST_IS_EMPTY: str = 'There\'s no one here! ( \' >\')'
 
+DONE: str = 'DONE'
+
+NOT_FOUND: str = 'NOT FOUND'
+
+WRONG_CHAT: str = 'Please vote in comments!'
+

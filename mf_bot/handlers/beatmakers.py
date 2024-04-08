@@ -6,6 +6,7 @@ from mf_bot.tools import (
     validate_user,
     is_channel, 
     registration_as_beatmaker, 
+    unregistration_as_beatmaker, 
     get_betmakers_list_as_string,
 ) 
 
@@ -26,8 +27,21 @@ async def is_battled(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def insert_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id, user_name = context.args[:2]
     reply_text = await registration_as_beatmaker(
-            user_id=user_id,
-            user_name=user_name
+        user_id=user_id,
+        user_name=user_name
+    ) 
+    await context.bot.send_message(
+        chat_id=update.effective_user.id,
+        text=reply_text
+    ) 
+
+
+@validate_user(mode='admin')
+async def remove_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id, user_name = context.args[:2]
+    reply_text = await unregistration_as_beatmaker(
+        user_id=user_id,
+        user_name=user_name
     ) 
     await context.bot.send_message(
         chat_id=update.effective_user.id,

@@ -6,6 +6,7 @@ from mf_bot.tools import (
     is_beatmaker, 
     insert_in_mode,
     insert_in_beatmaker, 
+    remove_from_beatmaker, 
 )
 from mf_bot.tools.battle import get_current_battle_id, battle_is_open
 from mf_bot.settings import ADMIN_PASSWORD
@@ -18,9 +19,19 @@ async def registration_as_beatmaker(user_id: int, user_name: LiteralString):
     if await is_beatmaker(user_id=user_id, battle_id=battle_id):
         return texts.IS_ALREADY_BEATMAKER
     await insert_in_beatmaker(
-            user_id=user_id, user_name=user_name, battle_id=battle_id
+        user_id=user_id, user_name=user_name, battle_id=battle_id
     )
     return texts.IS_BEATMAKER
+
+
+async def unregistration_as_beatmaker(user_id: int, user_name: LiteralString):
+    battle_id = await get_current_battle_id()
+    if not await is_beatmaker(user_id=user_id, battle_id=battle_id):
+        return texts.NOT_FOUND
+    await remove_from_beatmaker(
+        user_id=user_id, user_name=user_name, battle_id=battle_id
+    )
+    return texts.DONE
 
 
 async def registration_as_admin(user_id: int, password: str):
