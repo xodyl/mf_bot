@@ -38,14 +38,14 @@ async def insert_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @validate_user(mode='admin')
 async def remove_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id, user_name = context.args[:2]
-    reply_text = await unregistration_as_beatmaker(
-        user_id=user_id,
-        user_name=user_name
-    ) 
+    users_num = [int(num) for num in context.args]
     await context.bot.send_message(
         chat_id=update.effective_user.id,
-        text=reply_text
+        text=await unregistration_as_beatmaker(users_num)
+    )
+    await context.bot.send_message(
+        chat_id=update.effective_user.id,
+        text=await get_betmakers_list_as_string()
     ) 
 
 

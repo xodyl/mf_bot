@@ -50,17 +50,14 @@ async def insert_in_beatmaker(battle_id: int, user_id: int,
     await execute(sql, args)
 
 
-async def remove_from_beatmaker(battle_id: int, user_id: int, 
-                              user_name: LiteralString) -> None:
+async def remove_from_beatmaker(battle_id: int, user_id: int) -> None:
     sql = """
-        DELETE OR IGNORE FROM beatmaker 
-            (battle_id, user_id, user_name)
-        VALUES (:battle_id, :user_id, :user_name) 
+        DELETE FROM beatmaker 
+        WHERE battle_id = :battle_id AND user_id = :user_id
         """
     args = {
         "battle_id": battle_id,
         "user_id": user_id,
-        "user_name": user_name
     }
     await execute(sql, args)
 
