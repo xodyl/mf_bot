@@ -18,9 +18,9 @@ async def is_battled(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_text = await registration_as_beatmaker(
             user_id=user_id,
             user_name=update.effective_user.full_name
-        ) 
-        await context.bot.send_message(chat_id=user_id, 
-                                       text=reply_text) 
+        )
+        await context.bot.send_message(chat_id=user_id,
+                                       text=reply_text)
 
 
 @validate_user(mode='admin')

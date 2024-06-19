@@ -65,7 +65,7 @@ async def enumerate_beatmakers() -> dict:
     beatmakers = await get_beatmakers_from_last_battle()
     enumerated_beatmakers = {} 
     for index, beatmaker in enumerate(beatmakers):
-        enumerated_beatmakers[str(index)] = beatmaker
+        enumerated_beatmakers[int(index)] = beatmaker
     return enumerated_beatmakers
 
 
@@ -82,15 +82,16 @@ async def get_betmakers_list_as_string():
 
 
 async def nums_to_beatmakers_id(nums: list) -> list | None:
+    print(f'\n\n nums: {nums}')
     if not nums or 0 in nums:
         return None
     enumerated_beatmakers = await enumerate_beatmakers() 
     beatmakers_id = []
     for num in nums:
         num = int(num) - 1
-        if num < 0 or num > int(max(enumerated_beatmakers.keys())):
+        if num < 0 or num > max(enumerated_beatmakers.keys()):
             return None
-        beatmaker_user_id = enumerated_beatmakers[str(num)]['user_id']
+        beatmaker_user_id = enumerated_beatmakers[num]['user_id']
         beatmakers_id.append(beatmaker_user_id)
     return beatmakers_id
 

@@ -151,3 +151,4 @@ media/
 migrations/
 
 .sqlite3
+fix.sql
