@@ -21,7 +21,7 @@ async def has_duplicate(args) -> bool:
     return len(tuple(args)) != len(args)
 
 
-async def self_vote(user_id, beatmakers_id) -> bool:
+async def self_vote(user_id: int, beatmakers_id) -> bool:
     return user_id in beatmakers_id
 
 
@@ -46,7 +46,7 @@ async def start_new_vote(user_id: int) -> None:
     )
 
 
-async def start_new_vote_process(user_id):
+async def start_new_vote_process(user_id: int) -> str:
     if not battle_is_open():
         return texts.VOTE_IS_ALEREADY_OPEN
     await start_new_vote(user_id=user_id)
@@ -91,7 +91,7 @@ async def set_vote_process(args: List[str], user_id: int, chat_id) -> str:
     return texts.VOTE_ACCEPTED
 
 
-async def get_votes_from_last_battle():
+async def get_votes_from_last_battle() -> list[dict]:
     sql = '''
         SELECT v.battle_id, v.user_id,
            b1.user_id AS first_beatmaker_id, b1.user_name AS first_beatmaker_name,
@@ -131,7 +131,7 @@ async def update_rank(votes, rank) -> None:
     return rank
 
 
-async def count_vote_process():
+async def count_vote_process() -> str:
 
     if await battle_is_open():
         return texts.BATTLE_TIME

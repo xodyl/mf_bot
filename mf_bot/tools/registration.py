@@ -13,7 +13,7 @@ from mf_bot.tools.battle import get_current_battle_id, battle_is_open
 from mf_bot.settings import ADMIN_PASSWORD
   
 
-async def registration_as_beatmaker(user_id: int, user_name: LiteralString):
+async def registration_as_beatmaker(user_id: int, user_name: LiteralString) -> str:
     battle_id = await get_current_battle_id()
     if not await battle_is_open():
         return texts.VOTE_TIME
@@ -25,7 +25,7 @@ async def registration_as_beatmaker(user_id: int, user_name: LiteralString):
     return texts.IS_BEATMAKER
 
 
-async def unregistration_as_beatmaker(users_num: list):
+async def unregistration_as_beatmaker(users_num: list) -> str:
     battle_id = await get_current_battle_id()
     users_id = await nums_to_beatmakers_id(users_num)
     if users_id is None:
@@ -39,7 +39,7 @@ async def unregistration_as_beatmaker(users_num: list):
     return texts.DONE
 
 
-async def registration_as_admin(user_id: int, password: str):
+async def registration_as_admin(user_id: int, password: str) -> str:
     if not password:
         return texts.INVALID_ARGS
     if password != ADMIN_PASSWORD:

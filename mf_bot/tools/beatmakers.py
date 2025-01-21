@@ -5,7 +5,7 @@ from mf_bot.db import fetch_all, execute, fetch_one
 from mf_bot.tools.battle import get_current_battle_id
 
 
-async def get_beatmakers_from_last_battle():
+async def get_beatmakers_from_last_battle() -> list[dict]:
     sql = ''' 
         SELECT battle_id, user_id, user_name
         FROM beatmaker 
@@ -49,7 +49,7 @@ async def is_beatmaker(battle_id: int, user_id:int) -> bool:
     return user_exists is not None
 
 
-async def beatmakers_did_vote(votes):
+async def beatmakers_did_vote(votes: dict) -> dict:
     beatmakers = [
         beatmaker['user_name'] for beatmaker 
         in await get_beatmakers_from_last_battle() 
@@ -69,7 +69,7 @@ async def enumerate_beatmakers() -> dict:
     return enumerated_beatmakers
 
 
-async def get_betmakers_list_as_string():
+async def get_betmakers_list_as_string() -> str:
     beatmakers = await enumerate_beatmakers()
     if not beatmakers:
         return texts.BEATMAKERS_LIST_IS_EMPTY 

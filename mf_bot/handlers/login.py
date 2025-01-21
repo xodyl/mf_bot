@@ -5,7 +5,7 @@ from mf_bot.tools import registration_as_admin
 from mf_bot.texts import INVALID_ARGS
 
 
-async def login(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def login(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not context.args:
         await update.message.reply_text(INVALID_ARGS)
         return 

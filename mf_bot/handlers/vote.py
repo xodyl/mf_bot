@@ -5,7 +5,7 @@ from mf_bot.tools import validate_user, set_vote_process, count_vote_process
 
 
 @validate_user(mode='beatmaker')
-async def vote(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def vote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     args = context.args
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
@@ -14,7 +14,7 @@ async def vote(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @validate_user(mode='admin')
-async def count_vote(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def count_vote(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_text = await count_vote_process() 
     await update.message.reply_text(text=reply_text, parse_mode='HTML') 
 

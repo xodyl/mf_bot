@@ -11,7 +11,7 @@ from mf_bot.tools import (
 ) 
 
 
-async def is_battled(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def is_battled(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     chat_id = update.effective_chat.id
     user_id = update.effective_user.id
     if not await is_channel(user_id) and chat_id == CHAT_FOR_BEATS_ID:
@@ -24,7 +24,7 @@ async def is_battled(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @validate_user(mode='admin')
-async def insert_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def insert_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id, user_name = context.args[:2]
     reply_text = await registration_as_beatmaker(
         user_id=user_id,
@@ -37,7 +37,7 @@ async def insert_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 @validate_user(mode='admin')
-async def remove_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def remove_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     users_num = [int(num) for num in context.args]
     await context.bot.send_message(
         chat_id=update.effective_user.id,
@@ -49,7 +49,7 @@ async def remove_beatmaker(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ) 
 
 
-async def beatmakers(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def beatmakers(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_text = await get_betmakers_list_as_string()
     await update.message.reply_text(text=reply_text)
   

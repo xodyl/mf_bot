@@ -15,7 +15,7 @@ async def battle_is_open() -> bool:
     return battle['is_open'] == 1 
 
 
-async def start_new_battle(user_id) -> None:
+async def start_new_battle(user_id: int) -> None:
     current_battle_id = await get_current_battle_id()
     if not current_battle_id:
         current_battle_id = 0

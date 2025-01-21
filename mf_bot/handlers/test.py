@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 
-async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def test(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     chat_id = update.effective_chat.id
     user_id = update.effective_user.id
 
